@@ -7,7 +7,9 @@ class GifMe < Sinatra::Application
   get "/slack" do
     slack_url = URI("https://#{ config.slack.domain }.slack.com/services/hooks/incoming-webhook?token=#{ config.slack.token }")
 
-    body = "<@#{ params[:user_id]}|#{ params[:user_name] }>: \"#{ params[:text] }\" #{ gifme(params[:text]) }"
+    gif = params[:joke] || gifme(params[:text])
+
+    body = "<@#{ params[:user_id]}|#{ params[:user_name] }>: \"#{ params[:text] }\" #{ gif }"
 
     payload = { "channel"    => "##{ params[:channel_name] }",
                 "username"   => config.slack.username,
