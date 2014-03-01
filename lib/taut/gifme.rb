@@ -1,5 +1,5 @@
 module Taut
-  class GifMe < ::Sinatra::Application
+  class Gifme < ::Sinatra::Application
 
     get "/gif" do
       slack_url = URI("https://#{ config.slack_domain }.slack.com/services/hooks/incoming-webhook?token=#{ config.slack_token }")

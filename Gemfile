@@ -1,7 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.1.1"
-
-gem "rack"
-gem "multi_json"
-gem "sinatra"
+# Specify your gem's dependencies in ..gemspec
+gemspec
