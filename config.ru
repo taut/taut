@@ -7,7 +7,7 @@ class GifMe < Sinatra::Application
   get "/slack" do
     slack_url = URI("https://#{ config.slack.domain }.slack.com/services/hooks/incoming-webhook?token=#{ config.slack.token }")
 
-    gif = params[:joke] || gifme(params[:text])
+    gif = config.joke || gifme(params[:text])
 
     body = "<@#{ params[:user_id]}|#{ params[:user_name] }>: \"#{ params[:text] }\" #{ gif }"
 
@@ -39,7 +39,9 @@ class GifMe < Sinatra::Application
         token: ENV["SLACK_TOKEN"],
         emoji: ENV["SLACK_EMOJI"],
         username: ENV["SLACK_USERNAME"]
-      })
+      }),
+
+      joke: ENV["JOKE"]
     })
   end
 
