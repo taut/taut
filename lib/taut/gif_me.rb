@@ -13,7 +13,7 @@ module Taut
                   "icon_emoji" => config.slack_emoji,
                   "text"       => body }
 
-      Net::HTTP.post_form(slack_url, {"payload" => MultiJson.dump(payload)})
+      ::Net::HTTP.post_form(slack_url, {"payload" => MultiJson.dump(payload)})
 
       return
     end
@@ -26,7 +26,7 @@ module Taut
 
     def gifme(search)
       giphy_url = URI("http://api.giphy.com/v1/gifs/random?tag=#{ URI.escape(params[:text]) }&api_key=#{ config.giphy_api_key }")
-      MultiJson.load(Net::HTTP.get(giphy_url))["data"]["image_url"]
+      MultiJson.load(::Net::HTTP.get(giphy_url))["data"]["image_url"]
     end
 
   end
